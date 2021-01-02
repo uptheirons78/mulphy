@@ -1,14 +1,13 @@
 const path = require(`path`);
 const { createFilePath } = require("gatsby-source-filesystem");
-const { paginate } = require("gatsby-awesome-pagination");
 
 async function makePostsFromMarkdown({ graphql, actions }) {
-  const { createPage } = actions;
   const postTemplate = path.resolve(`./src/templates/blog-post.js`);
   const { errors, data } = await graphql(`
     query {
       allMarkdownRemark(
-        filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+        filter: { fields: { collection: { eq: "posts" } } }
+        sort: { fields: [frontmatter___date], order: DESC }
       ) {
         edges {
           node {
@@ -20,14 +19,6 @@ async function makePostsFromMarkdown({ graphql, actions }) {
       }
     }
   `);
-
-  paginate({
-    createPage,
-    items: data.allMarkdownRemark.edges,
-    itemsPerPage: 2,
-    pathPrefix: "/blog",
-    component: path.resolve("src/templates/blog-archive.js"),
-  });
 
   if (errors) {
     console.log(errors);
@@ -48,6 +39,91 @@ async function makePostsFromMarkdown({ graphql, actions }) {
         id,
         previous,
         next,
+        collection: "posts",
+        pathPrefix: "/blog",
+      },
+    });
+  });
+}
+
+async function makeProjectsFromMarkdown({ graphql, actions }) {
+  const projectsTemplate = path.resolve(`./src/templates/project.js`);
+  const { errors, data } = await graphql(`
+    query {
+      allMarkdownRemark(
+        filter: { fields: { collection: { eq: "projects" } } }
+        sort: { fields: [frontmatter___date], order: DESC }
+      ) {
+        edges {
+          node {
+            frontmatter {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  if (errors) {
+    console.log(errors);
+    throw new Error("There was an error");
+  }
+
+  const projects = data.allMarkdownRemark.edges;
+
+  projects.forEach((project, index) => {
+    const id = project.node.id;
+    const previous =
+      index === projects.length - 1 ? null : projects[index + 1].node;
+    const next = index === 0 ? null : projects[index - 1].node;
+    actions.createPage({
+      path: `/projects/${project.node.frontmatter.slug}`,
+      component: projectsTemplate,
+      context: {
+        slug: project.node.frontmatter.slug,
+        id,
+        previous,
+        next,
+        collection: "projects",
+        pathPrefix: "/projects",
+      },
+    });
+  });
+}
+
+async function paginate({
+  graphql,
+  actions,
+  collection,
+  pathPrefix,
+  component,
+}) {
+  const { errors, data } = await graphql(
+    `
+      {
+        allMarkdownRemark(filter: { fields: { collection: { eq: "${collection}" } } }) {
+          totalCount
+        }
+      }
+    `
+  );
+  if (errors) {
+    console.log(errors);
+    throw new Error("There was an error");
+  }
+  const { totalCount } = data.allMarkdownRemark;
+  const pages = Math.ceil(totalCount / 10);
+
+  Array.from({ length: pages }).forEach((_, i) => {
+    // for each page, use the createPages api to dynamically create that page
+    actions.createPage({
+      // path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+      path: i === 0 ? `${pathPrefix}` : `${pathPrefix}${i + 1}`,
+      component,
+      context: {
+        skip: i * 10,
+        currentPage: i + 1,
       },
     });
   });
@@ -55,7 +131,24 @@ async function makePostsFromMarkdown({ graphql, actions }) {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  await Promise.all([makePostsFromMarkdown({ graphql, actions })]);
+  await Promise.all([
+    makePostsFromMarkdown({ graphql, actions }),
+    makeProjectsFromMarkdown({ graphql, actions }),
+    paginate({
+      graphql,
+      actions,
+      collection: "projects",
+      pathPrefix: "/projects/",
+      component: path.resolve("./src/templates/projects-archive.js"),
+    }),
+    paginate({
+      graphql,
+      actions,
+      collection: "posts",
+      pathPrefix: "/blog/",
+      component: path.resolve("./src/templates/blog-archive.js"),
+    }),
+  ]);
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {

@@ -3,12 +3,12 @@ import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
 import Pagination from "../components/Pagination";
 
-const BlogArchive = ({ data, pageContext }) => {
-  const posts = data.allMarkdownRemark.edges;
+const ProjectsArchive = ({ data, pageContext }) => {
+  const projects = data.allMarkdownRemark.edges;
 
   return (
     <Layout>
-      {posts.map(({ node }) => {
+      {projects.map(({ node }) => {
         const title = node.frontmatter.title;
         return (
           <article key={node.frontmatter.slug}>
@@ -28,22 +28,23 @@ const BlogArchive = ({ data, pageContext }) => {
           </article>
         );
       })}
-      <pre>{JSON.stringify(pageContext, null, 2)}</pre>
       <Pagination
         currentPage={pageContext.currentPage}
         totalCount={data.allMarkdownRemark.totalCount}
-        pathPrefix="/blog/"
+        pathPrefix="/projects/"
       />
+
+      <pre>{JSON.stringify(pageContext, null, 2)}</pre>
     </Layout>
   );
 };
 
-export default BlogArchive;
+export default ProjectsArchive;
 
 export const pageQuery = graphql`
-  query Posts($skip: Int! = 0) {
+  query Projects($skip: Int! = 0) {
     allMarkdownRemark(
-      filter: { fields: { collection: { eq: "posts" } } }
+      filter: { fields: { collection: { eq: "projects" } } }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 5
       skip: $skip
