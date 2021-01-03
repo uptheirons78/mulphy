@@ -1,15 +1,21 @@
-import React from "react";
-import { Link } from "gatsby";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalContext";
 import styled from "styled-components";
 import Logo from "../images/fake-logo.svg";
+import NavLinks from "./NavLinks";
 
 const Navigation = () => {
+  const { handleToggle } = useContext(GlobalContext);
   return (
     <StyledNavigation>
       <div className="logo-container">
         <img src={Logo} alt="Mulphy Logo" />
       </div>
-      <button className="hamburger-menu" aria-controls="mobile-menu">
+      <button
+        className="hamburger-menu"
+        aria-controls="mobile-menu"
+        onClick={handleToggle}
+      >
         <svg
           class="w-6 h-6"
           fill="none"
@@ -25,20 +31,7 @@ const Navigation = () => {
           ></path>
         </svg>
       </button>
-      <ul>
-        <li>
-          <Link to="/">Chi Siamo</Link>
-        </li>
-        <li>
-          <Link to="/projects">Portfolio</Link>
-        </li>
-        <li>
-          <Link to="/blog">Blog</Link>
-        </li>
-        <li>
-          <Link to="/">Contatti</Link>
-        </li>
-      </ul>
+      <NavLinks />
     </StyledNavigation>
   );
 };
@@ -46,6 +39,7 @@ const Navigation = () => {
 export default Navigation;
 
 const StyledNavigation = styled.nav`
+  position: relative;
   height: 90px;
   padding: 0 1rem;
   display: flex;

@@ -2,6 +2,7 @@ import React from "react";
 /** Import GlobalStyles and Theme from styled-components */
 import GlobalStyle from "../styles/GlobalStyles";
 import Footer from "./Footer";
+import MobileNavigation from "./MobileNavigation";
 import Navigation from "./Navigation";
 
 const Layout = props => {
@@ -11,6 +12,7 @@ const Layout = props => {
       <Navigation />
       <main>{props.children}</main>
       <Footer />
+      <MobileNavigation />
     </>
   );
 };
