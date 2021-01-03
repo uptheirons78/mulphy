@@ -1,6 +1,21 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --primaryColor: #B20932;
+    --secondaryColor: #FAA916;
+    --black: #393939;
+    --lightBlack: #666666;
+    --grey: #F7F7F7;
+    --metaColor: #A7A7A7;
+    --white: #FFFFFF;
+    --bsl:
+      0px 70px 40px -50px rgba(0, 0, 0, 0.4), 0px 3px 20px 8px rgba(0, 0, 0, 0.2);
+    --bsh:
+      0px 70px 40px -50px rgba(0, 0, 0, 0.6), 0px 3px 20px 8px rgba(0, 0, 0, 0.3);
+  }
+
+
   *,
   *::before,
   *::after {
@@ -8,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: inherit;
   }
+
   html {
     box-sizing: border-box;
     font-size: 16px;
@@ -18,18 +34,26 @@ const GlobalStyle = createGlobalStyle`
     font-size: 14px;
     }
   }
+
   body {
     font-family: 'Open Sans', sans-serif;
   }
+
   h1,h2,h3,h4,h5,h6 {
     font-family: 'Lato', sans-serif;
     font-weight: 900;
     letter-spacing: 1px;
   }
+
   p {
     font-size: 1rem;
     line-height: 1.5;
   }
+
+  a {
+    text-decoration: none;
+  }
+
 `;
 
 export default GlobalStyle;

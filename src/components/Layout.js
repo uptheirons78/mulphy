@@ -1,15 +1,17 @@
 import React from "react";
-// import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
+/** Import GlobalStyles and Theme from styled-components */
 import GlobalStyle from "../styles/GlobalStyles";
-import Theme from "../styles/Theme";
+import Footer from "./Footer";
+import Navigation from "./Navigation";
 
 const Layout = props => {
   return (
-    <ThemeProvider theme={Theme}>
+    <>
       <GlobalStyle />
+      <Navigation />
       <main>{props.children}</main>
-    </ThemeProvider>
+      <Footer />
+    </>
   );
 };
 
