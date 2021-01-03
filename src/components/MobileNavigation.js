@@ -3,6 +3,7 @@ import { GlobalContext } from "../context/GlobalContext";
 import Logo from "../images/fake-logo.svg";
 import styled from "styled-components";
 import NavLinks from "./NavLinks";
+import SocialNav from "./SocialNav";
 
 function MobileNavigation() {
   const { toggle, handleToggle } = useContext(GlobalContext);
@@ -13,6 +14,7 @@ function MobileNavigation() {
         <img src={Logo} alt="Mulphy Logo" />
       </div>
       <NavLinks />
+      <SocialNav />
     </StyledMobileMenu>
   );
 }
