@@ -1,15 +1,28 @@
 import React, { useContext } from "react";
+import { Link, useStaticQuery, graphql } from "gatsby";
 import { GlobalContext } from "../context/GlobalContext";
 import styled from "styled-components";
-import Logo from "../images/fake-logo.svg";
 import NavLinks from "./NavLinks";
 
 const Navigation = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      logo: file(relativePath: { eq: "mulphy-logo.png" }) {
+        childImageSharp {
+          resize(width: 200) {
+            src
+          }
+        }
+      }
+    }
+  `);
   const { handleToggle } = useContext(GlobalContext);
   return (
     <StyledNavigation>
       <div className="logo-container">
-        <img src={Logo} alt="Mulphy Logo" />
+        <Link to="/">
+          <img src={data.logo.childImageSharp.resize.src} alt="Mulphy Logo" />
+        </Link>
       </div>
       <button
         className="hamburger-menu"
@@ -48,7 +61,12 @@ const StyledNavigation = styled.nav`
   border-bottom: 2px solid var(--black);
 
   .logo-container {
-    width: 180px;
+    width: 130px;
+
+    @media screen and (max-width: 580px) {
+      width: 120px;
+    }
+
     img {
       width: 100%;
     }

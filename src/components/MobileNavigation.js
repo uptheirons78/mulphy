@@ -1,17 +1,30 @@
 import React, { useContext } from "react";
+import { Link, useStaticQuery, graphql } from "gatsby";
 import { GlobalContext } from "../context/GlobalContext";
-import Logo from "../images/fake-logo.svg";
 import styled from "styled-components";
 import NavLinks from "./NavLinks";
 import SocialNav from "./SocialNav";
 
 function MobileNavigation() {
+  const data = useStaticQuery(graphql`
+    query {
+      logo: file(relativePath: { eq: "mulphy-logo.png" }) {
+        childImageSharp {
+          resize(width: 200) {
+            src
+          }
+        }
+      }
+    }
+  `);
   const { toggle, handleToggle } = useContext(GlobalContext);
   const mobileClass = toggle ? "open" : "";
   return (
     <StyledMobileMenu className={mobileClass} onClick={handleToggle}>
       <div className="logo-container">
-        <img src={Logo} alt="Mulphy Logo" />
+        <Link to="/">
+          <img src={data.logo.childImageSharp.resize.src} alt="Mulphy Logo" />
+        </Link>
       </div>
       <NavLinks />
       <SocialNav />
@@ -43,6 +56,8 @@ const StyledMobileMenu = styled.nav`
 
   .logo-container {
     width: 180px;
+    padding-right: 2rem;
+    margin-top: 1rem;
     img {
       width: 100%;
     }
