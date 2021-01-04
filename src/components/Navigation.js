@@ -54,11 +54,12 @@ export default Navigation;
 const StyledNavigation = styled.nav`
   position: relative;
   height: 90px;
-  padding: 0 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--black);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--pmd);
 
   .logo-container {
     width: 130px;
