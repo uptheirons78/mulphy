@@ -58,8 +58,8 @@ const StyledSocialList = styled.nav`
     margin-left: 0.6rem;
   }
   svg {
-    fill: var(--primaryColor);
-    background: #fff;
+    fill: var(--clr-teal-700);
+    background: var(--clr-gray-50);
     width: 1.7rem;
     height: 1.7rem;
     padding: 0.4rem;

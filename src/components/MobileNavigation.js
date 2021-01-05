@@ -42,7 +42,7 @@ const StyledMobileMenu = styled.nav`
   width: 85vw;
   height: 100vh;
   opacity: 0;
-  background-color: var(--primaryColor);
+  background-color: var(--clr-teal-700);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -75,7 +75,7 @@ const StyledMobileMenu = styled.nav`
       margin-bottom: 1rem;
 
       a {
-        color: var(--white);
+        color: var(--clr-gray-50);
       }
     }
   }

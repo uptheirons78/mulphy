@@ -57,9 +57,9 @@ const StyledNavigation = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1100px;
+  max-width: var(--container-width);
   margin: 0 auto;
-  padding: 0 var(--pmd);
+  padding: 0 var(--sp-4);
 
   .logo-container {
     width: 130px;
@@ -75,7 +75,7 @@ const StyledNavigation = styled.nav`
 
   .hamburger-menu {
     border: none;
-    background: var(--white);
+    background: var(--clr-gray-50);
     display: none;
     &:focus {
       outline: none;
@@ -88,7 +88,7 @@ const StyledNavigation = styled.nav`
     svg {
       width: 30px;
       height: 30px;
-      fill: var(--black);
+      fill: var(--clr-gray-900);
     }
   }
 
@@ -102,9 +102,9 @@ const StyledNavigation = styled.nav`
     }
 
     li {
-      margin-right: 1rem;
+      margin-right: var(--sp-4);
       a {
-        color: var(--black);
+        color: var(--clr-gray-900);
       }
     }
   }

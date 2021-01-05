@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import styled from "styled-components";
 
 const PaginationStyles = styled.div`
-  color: var(--black);
+  color: var(--clr-gray-900);
   max-width: 600px;
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -24,7 +24,7 @@ const PaginationStyles = styled.div`
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
   }
   a {
-    color: var(--black);
+    color: var(--clr-gray-900);
   }
   a[disabled] {
     opacity: 0.5;

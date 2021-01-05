@@ -60,17 +60,17 @@ export default HomeSectionOne;
 
 const StyledSectionOne = styled.section`
   height: calc(100vh - 90px);
-  background-color: #156096;
+  background-color: var(--clr-secondary);
   background-size: cover;
   background-repeat: no-repeat;
   padding-top: 50px;
-  padding-left: var(--pmd);
-  padding-right: var(--pmd);
+  padding-left: var(--sp-4);
+  padding-right: var(--sp-4);
 
   .wrapper {
-    max-width: var(--max-width);
+    max-width: var(--container-width);
     margin: 0 auto;
-    color: var(--white);
+    color: var(--clr-gray-50);
     display: grid;
     grid-template-columns: 1fr 1fr;
 
@@ -89,18 +89,18 @@ const StyledSectionOne = styled.section`
     }
 
     h1 {
-      font-size: 4rem;
+      font-size: 3.5rem;
       font-weight: 900;
 
       .accent-word {
-        color: #f31f53;
+        color: var(--clr-primary);
       }
     }
 
     p {
       font-size: 1.4rem;
       line-height: 2rem;
-      margin-top: 2rem;
+      margin-top: var(--sp-4);
     }
   }
 `;
