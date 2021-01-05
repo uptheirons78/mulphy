@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 
 const HomeSectionOne = () => {
@@ -43,6 +43,9 @@ const HomeSectionOne = () => {
             <br />
             dei suoi clienti.
           </p>
+          <Link className="home-cta" to="/contatti">
+            Chiedi un preventivo →
+          </Link>
         </div>
         <div className="right-container">
           <Img
@@ -101,6 +104,19 @@ const StyledSectionOne = styled.section`
       font-size: 1.4rem;
       line-height: 2rem;
       margin-top: var(--sp-4);
+    }
+
+    .home-cta {
+      display: inline-block;
+      margin-top: var(--sp-6);
+      background-color: var(--clr-primary);
+      color: var(--clr-gray-50);
+      padding: var(--sp-1) var(--sp-4);
+      transition: all 450ms;
+
+      &:hover {
+        letter-spacing: 1px;
+      }
     }
   }
 `;

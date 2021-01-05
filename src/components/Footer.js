@@ -8,5 +8,5 @@ const Footer = () => {
 export default Footer;
 
 const StyledFooter = styled.footer`
-  color: var(--clr-purple-600);
+  color: var(--clr-red-600);
 `;
