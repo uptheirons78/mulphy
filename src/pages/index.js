@@ -1,5 +1,6 @@
 import React from "react";
 import HomeSectionOne from "../components/HomeSectionOne";
+import HomeSectionTwo from "../components/HomeSectionTwo";
 import Layout from "../components/Layout";
 
 /** Components */
@@ -9,6 +10,7 @@ const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
     <HomeSectionOne />
+    <HomeSectionTwo />
   </Layout>
 );
 

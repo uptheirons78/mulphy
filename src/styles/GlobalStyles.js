@@ -14,6 +14,11 @@ const GlobalStyle = createGlobalStyle`
     /* Fonts */
     --font-primary: 'Open Sans', sans-serif;
     --font-secondary: 'Lato', sans-serif;
+    /* Shadows */
+    --shadow-light:
+    0px 70px 40px -50px rgba(0, 0, 0, 0.4), 0px 3px 20px 8px rgba(0, 0, 0, 0.2);
+    --shadow-heavy:
+    0px 70px 40px -50px rgba(0, 0, 0, 0.6), 0px 3px 20px 8px rgba(0, 0, 0, 0.3);
     /* Theme Colors */
     --clr-primary: #F31F53;
     --clr-secondary: #156096;
