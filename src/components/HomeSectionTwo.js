@@ -36,7 +36,6 @@ const HomeSectionTwo = () => {
 export default HomeSectionTwo;
 
 const StyledSectionTwo = styled.section`
-  background-color: var(--clr-blue-100);
   max-width: var(--container-width);
   width: 100%;
   margin: 0 auto;
