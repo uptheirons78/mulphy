@@ -1,7 +1,9 @@
 import { createGlobalStyle } from "styled-components";
+import { Colors } from "./Variables";
 
 const GlobalStyle = createGlobalStyle`
   :root {
+    ${Colors}
     --primaryColor: #f31f53;
     --secondaryColor: #156096;
     --black: #393939;
