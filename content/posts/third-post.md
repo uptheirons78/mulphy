@@ -2,6 +2,7 @@
 templateKey: blog-post
 title: Third Post
 date: "2021-01-07T13:12:03.284Z"
+metadate: "2021-01-07T13:12:03.284Z"
 description: "Third Post"
 slug: third-post
 ---

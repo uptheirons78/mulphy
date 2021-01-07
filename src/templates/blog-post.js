@@ -1,19 +1,44 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
+import Helmet from "react-helmet";
 import styled from "styled-components";
 import Layout from "../components/Layout";
+import defaultImage from "../images/mulphy-default.png";
 
 const Post = ({ data, pageContext }) => {
   const {
     title,
+    slug,
     date,
+    metadate,
     description,
     thumbnail,
   } = data.markdownRemark.frontmatter;
 
+  const ogImage = thumbnail
+    ? `https://mulphy.com${thumbnail.childImageSharp.fluid.src}`
+    : `https://mulphy.com${defaultImage}`;
+
   return (
     <Layout>
+      <Helmet>
+        <html lang="it" />
+        <title>{`Mulphy - ${title}`}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://mulphy.com/blog/${slug}`} />
+        <meta property="og:title" content={title} />
+        <meta property="og:locale" content="it_IT" />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+        <link rel="canonical" href={`https://mulphy.com/blog/${slug}`} />
+        {date ? (
+          <meta property="article:published_time" content={metadate} />
+        ) : null}
+      </Helmet>
       <MarkdownContent>
         <h1 className="post-title">{title}</h1>
         <p className="post-date">{date}</p>
@@ -31,21 +56,18 @@ const Post = ({ data, pageContext }) => {
           {pageContext.previous && (
             <li>
               <Link to={`/blog/${pageContext.previous.frontmatter.slug}`}>
-                ← {pageContext.previous.frontmatter.slug}
+                ← Precedente
               </Link>
             </li>
           )}
           {pageContext.next && (
             <li>
               <Link to={`/blog/${pageContext.next.frontmatter.slug}`}>
-                {pageContext.next.frontmatter.slug} →
+                Successivo →
               </Link>
             </li>
           )}
         </ul>
-
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-        <pre>{JSON.stringify(pageContext, null, 2)}</pre>
       </MarkdownContent>
     </Layout>
   );
@@ -153,6 +175,7 @@ export const pageQuery = graphql`
         title
         description
         date(formatString: "DD MMMM YYYY", locale: "it")
+        metadate
         thumbnail {
           childImageSharp {
             fluid(maxWidth: 600) {

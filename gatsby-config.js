@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `Mulphy`,
-    description: `Your Digital Experience.`,
-    author: `Mauro Bono`,
+    description: `Agenzia digitale ed innovativa con esperienza nel design e nello sviluppo di siti internet, Worpress, SEO, SEM, branding e marketing.`,
+    author: `Mulphy`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -45,7 +45,6 @@ module.exports = {
             options: {
               maxWidth: 1200,
               linkImagesToOriginal: false,
-              sizeByPixelDensity: true,
               showCaptions: false,
             },
           },
