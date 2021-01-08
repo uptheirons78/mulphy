@@ -2,13 +2,11 @@ import React from "react";
 import HomeSectionOne from "../components/HomeSectionOne";
 import HomeSectionTwo from "../components/HomeSectionTwo";
 import Layout from "../components/Layout";
-
-/** Components */
-import SEO from "../components/seo";
+import { PageMetaTags } from "../components/MetaTags";
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" />
+    <PageMetaTags title="Home" />
     <HomeSectionOne />
     <HomeSectionTwo />
   </Layout>

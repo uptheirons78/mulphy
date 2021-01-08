@@ -1,8 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: `Mulphy`,
-    description: `Agenzia digitale ed innovativa con esperienza nel design e nello sviluppo di siti internet, Worpress, SEO, SEM, branding e marketing.`,
-    author: `Mulphy`,
+    siteTitle: `Mulphy`,
+    siteDescription: `Agenzia digitale ed innovativa con esperienza nel design e nello sviluppo di siti internet, Worpress, SEO, SEM, branding e marketing.`,
+    siteAuthor: `Mulphy`,
+    baseUrl: `https://mulphy.com`,
+    twitterAccount: `UpTheIrons1978`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

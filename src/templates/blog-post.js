@@ -1,44 +1,21 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
-import Helmet from "react-helmet";
 import styled from "styled-components";
 import Layout from "../components/Layout";
-import defaultImage from "../images/mulphy-default.png";
+import { PostMetaTags } from "../components/MetaTags";
 
 const Post = ({ data, pageContext }) => {
   const {
     title,
-    slug,
     date,
-    metadate,
     description,
     thumbnail,
   } = data.markdownRemark.frontmatter;
 
-  const ogImage = thumbnail
-    ? `https://mulphy.com${thumbnail.childImageSharp.fluid.src}`
-    : `https://mulphy.com${defaultImage}`;
-
   return (
     <Layout>
-      <Helmet>
-        <html lang="it" />
-        <title>{`Mulphy - ${title}`}</title>
-        <meta name="title" content={title} />
-        <meta name="description" content={description} />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://mulphy.com/blog/${slug}`} />
-        <meta property="og:title" content={title} />
-        <meta property="og:locale" content="it_IT" />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={ogImage} />
-        <link rel="canonical" href={`https://mulphy.com/blog/${slug}`} />
-        {date ? (
-          <meta property="article:published_time" content={metadate} />
-        ) : null}
-      </Helmet>
+      <PostMetaTags post={data} />
       <MarkdownContent>
         <h1 className="post-title">{title}</h1>
         <p className="post-date">{date}</p>
@@ -169,6 +146,18 @@ const MarkdownContent = styled.article`
 // Gatsby Query
 export const pageQuery = graphql`
   query PostsBySlug($slug: String!) {
+    site {
+      siteMetadata {
+        baseUrl
+        twitterAccount
+        siteTitle
+        siteDescription
+        siteAuthor
+      }
+    }
+    defaultImage: file(relativePath: { eq: "mulphy-default.png" }) {
+      publicURL
+    }
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       frontmatter {
         slug
