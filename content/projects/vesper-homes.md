@@ -16,6 +16,8 @@ projectImage: "../assets/vesper-homes.jpg"
 
 Vesper Homes is a London based estate agency, with a core focus on property management around the rental market. They boast a streamlined business model that offers clients significantly lower fees whilst also enhancing the landlord and tenant experience.
 
+![Image of Yaktocat](../assets/insta-shopify.jpg)
+
 ### THE BRIEF
 
 Vesper initially approached us to help them re-brand. The last piece of the puzzle was to transform their digital presence. The key was to build a dynamic space that was interactive and engaging, without compromising on building an environment that clearly and concisely showcased their business offering.

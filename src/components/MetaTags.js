@@ -46,6 +46,50 @@ export function PostMetaTags({ post }) {
   );
 }
 
+export function ProjectMetaTags({ project }) {
+  const { baseUrl, twitterAccount } = project.site.siteMetadata;
+
+  const {
+    title,
+    description,
+    projectThumbnail,
+    date,
+    slug,
+  } = project.markdownRemark.frontmatter;
+
+  const canonical = `${baseUrl}/projects/${slug}`;
+  const ogImage = projectThumbnail
+    ? `${baseUrl}${projectThumbnail.childImageSharp.fluid.src}`
+    : `${baseUrl}${project.defaultImage.publicURL}`;
+
+  return (
+    <Helmet>
+      <html lang="it" />
+      <link rel="canonical" href={canonical} />
+      <meta name="generator" content="Mulphy: Your Next Digital Agency" />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:site" content={twitterAccount} />
+      <meta name="twitter:creator" content={twitterAccount} />
+      <meta name="twitter:url" content={canonical} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
+      <meta property="og:type" content="article" />
+      <meta property="og:title" content={title} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:description" content={description} />
+      {date ? <meta property="article:published_time" content={date} /> : null}
+
+      <meta property="og:site_name" content="Mulphy" />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="600" />
+      <meta property="og:image:height" content="315" />
+      <meta property="og:locale" content="it_IT" />
+      <title>{title} - Mulphy</title>
+    </Helmet>
+  );
+}
+
 export function PageMetaTags(props) {
   return (
     <Helmet>

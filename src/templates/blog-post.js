@@ -81,6 +81,8 @@ const MarkdownContent = styled.article`
     width: 100%;
     font-size: 1.2rem;
     font-weight: 200;
+    border-left: 4px solid var(--clr-primary);
+    padding-left: var(--sp-2);
   }
 
   .post-thumbnail {
@@ -92,6 +94,10 @@ const MarkdownContent = styled.article`
     max-width: 800px;
     margin: var(--sp-8) auto;
     padding: 0 var(--sp-4);
+
+    @media screen and (max-width: 550px) {
+      padding: 0;
+    }
 
     h1,
     h2,
@@ -117,6 +123,9 @@ const MarkdownContent = styled.article`
     }
 
     p {
+      @media screen and (max-width: 550px) {
+        font-size: 1.1rem;
+      }
       .gatsby-resp-image-wrapper {
         margin-top: var(--sp-3) !important;
         margin-bottom: var(--sp-3) !important;
@@ -134,7 +143,7 @@ const MarkdownContent = styled.article`
     a {
       color: var(--clr-primary);
       transition: all 350ms;
-      font-size: 1.2rem;
+      font-size: 1rem;
 
       &:hover {
         letter-spacing: 1px;
