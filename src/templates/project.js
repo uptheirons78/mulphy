@@ -4,17 +4,20 @@ import styled from "styled-components";
 import Layout from "../components/Layout";
 import Img from "gatsby-image";
 import { ProjectMetaTags } from "../components/MetaTags";
+import SocialShare from "../components/SocialShare";
 
 const Project = ({ data, pageContext }) => {
   const {
     title,
     subTitle,
+    slug,
     projectUrl,
     projectClient,
     projectDate,
     projectCategory,
     projectThumbnail,
   } = data.markdownRemark.frontmatter;
+  const { baseUrl } = data.site.siteMetadata;
 
   return (
     <Layout>
@@ -55,6 +58,15 @@ const Project = ({ data, pageContext }) => {
           className="project-content"
           dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
         ></div>
+        <div className="social-container">
+          <SocialShare
+            socialConfig={{
+              config: {
+                url: `${baseUrl}/projects/${slug}`,
+              },
+            }}
+          />
+        </div>
         <ul className="project-links">
           {pageContext.previous && (
             <li>
@@ -203,6 +215,15 @@ const ProjectContent = styled.article`
       &:hover {
         letter-spacing: 1px;
       }
+    }
+  }
+
+  .social-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--sp-4);
+    @media screen and (max-width: 550px) {
+      padding: 0;
     }
   }
 `;

@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby";
 import Img from "gatsby-image";
 import styled from "styled-components";
 import Layout from "../components/Layout";
+import SocialShare from "../components/SocialShare";
 import { PostMetaTags } from "../components/MetaTags";
 
 const Post = ({ data, pageContext }) => {
@@ -11,7 +12,9 @@ const Post = ({ data, pageContext }) => {
     date,
     description,
     thumbnail,
+    slug,
   } = data.markdownRemark.frontmatter;
+  const { baseUrl } = data.site.siteMetadata;
 
   return (
     <Layout>
@@ -29,6 +32,15 @@ const Post = ({ data, pageContext }) => {
           className="post-content"
           dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
         ></div>
+        <div className="social-container">
+          <SocialShare
+            socialConfig={{
+              config: {
+                url: `${baseUrl}/blog/${slug}`,
+              },
+            }}
+          />
+        </div>
         <ul className="post-links">
           {pageContext.previous && (
             <li>
@@ -148,6 +160,14 @@ const MarkdownContent = styled.article`
       &:hover {
         letter-spacing: 1px;
       }
+    }
+  }
+  .social-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--sp-4);
+    @media screen and (max-width: 550px) {
+      padding: 0;
     }
   }
 `;
