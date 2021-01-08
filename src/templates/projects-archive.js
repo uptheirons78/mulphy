@@ -1,10 +1,15 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
-import Pagination from "../components/Pagination";
 
 const ProjectsArchive = ({ data, pageContext }) => {
   const projects = data.allMarkdownRemark.edges;
+  const { currentPage, pages } = pageContext;
+  const isFirst = currentPage === 1;
+  const isLast = currentPage === pages;
+  const prevPage =
+    currentPage - 1 === 1 ? "/projects/" : (currentPage - 1).toString();
+  const nextPage = (currentPage + 1).toString();
 
   return (
     <Layout>
@@ -28,13 +33,24 @@ const ProjectsArchive = ({ data, pageContext }) => {
           </article>
         );
       })}
-      <Pagination
-        currentPage={pageContext.currentPage}
-        totalCount={data.allMarkdownRemark.totalCount}
-        pathPrefix="/projects/"
-      />
-
-      <pre>{JSON.stringify(pageContext, null, 2)}</pre>
+      {!isFirst && (
+        <Link to={prevPage} rel="prev">
+          ← Previous Page
+        </Link>
+      )}
+      {Array.from({ length: pages }, (_, i) => (
+        <Link
+          key={`pagination-number${i + 1}`}
+          to={`/projects/${i === 0 ? "" : i + 1}`}
+        >
+          {i + 1}
+        </Link>
+      ))}
+      {!isLast && (
+        <Link to={nextPage} rel="next">
+          Next Page →
+        </Link>
+      )}
     </Layout>
   );
 };
@@ -42,11 +58,11 @@ const ProjectsArchive = ({ data, pageContext }) => {
 export default ProjectsArchive;
 
 export const pageQuery = graphql`
-  query Projects($skip: Int! = 0) {
+  query Projects($skip: Int! = 0, $limit: Int!) {
     allMarkdownRemark(
       filter: { fields: { collection: { eq: "projects" } } }
       sort: { fields: [frontmatter___date], order: DESC }
-      limit: 5
+      limit: $limit
       skip: $skip
     ) {
       totalCount

@@ -113,7 +113,8 @@ async function paginate({
     throw new Error("There was an error");
   }
   const { totalCount } = data.allMarkdownRemark;
-  const pages = Math.ceil(totalCount / 10);
+  const postsPerPages = 5;
+  const pages = Math.ceil(totalCount / postsPerPages);
 
   Array.from({ length: pages }).forEach((_, i) => {
     // for each page, use the createPages api to dynamically create that page
@@ -122,7 +123,9 @@ async function paginate({
       path: i === 0 ? `${pathPrefix}` : `${pathPrefix}${i + 1}`,
       component,
       context: {
-        skip: i * 10,
+        limit: postsPerPages,
+        skip: i * postsPerPages,
+        pages,
         currentPage: i + 1,
       },
     });

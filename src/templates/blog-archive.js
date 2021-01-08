@@ -1,10 +1,15 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
-import Pagination from "../components/Pagination";
 
 const BlogArchive = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges;
+  const { currentPage, pages } = pageContext;
+  const isFirst = currentPage === 1;
+  const isLast = currentPage === pages;
+  const prevPage =
+    currentPage - 1 === 1 ? "/blog/" : (currentPage - 1).toString();
+  const nextPage = (currentPage + 1).toString();
 
   return (
     <Layout>
@@ -28,12 +33,25 @@ const BlogArchive = ({ data, pageContext }) => {
           </article>
         );
       })}
-      <pre>{JSON.stringify(pageContext, null, 2)}</pre>
-      <Pagination
-        currentPage={pageContext.currentPage}
-        totalCount={data.allMarkdownRemark.totalCount}
-        pathPrefix="/blog/"
-      />
+
+      {!isFirst && (
+        <Link to={prevPage} rel="prev">
+          ← Previous Page
+        </Link>
+      )}
+      {Array.from({ length: pages }, (_, i) => (
+        <Link
+          key={`pagination-number${i + 1}`}
+          to={`/blog/${i === 0 ? "" : i + 1}`}
+        >
+          {i + 1}
+        </Link>
+      ))}
+      {!isLast && (
+        <Link to={nextPage} rel="next">
+          Next Page →
+        </Link>
+      )}
     </Layout>
   );
 };
@@ -41,11 +59,11 @@ const BlogArchive = ({ data, pageContext }) => {
 export default BlogArchive;
 
 export const pageQuery = graphql`
-  query Posts($skip: Int! = 0) {
+  query Posts($skip: Int! = 0, $limit: Int!) {
     allMarkdownRemark(
       filter: { fields: { collection: { eq: "posts" } } }
       sort: { fields: [frontmatter___date], order: DESC }
-      limit: 5
+      limit: $limit
       skip: $skip
     ) {
       totalCount
