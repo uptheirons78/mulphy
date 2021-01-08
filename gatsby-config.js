@@ -1,10 +1,16 @@
 module.exports = {
   siteMetadata: {
     siteTitle: `Mulphy`,
-    siteDescription: `Agenzia digitale ed innovativa con esperienza nel design e nello sviluppo di siti internet, Worpress, SEO, SEM, branding e marketing.`,
+    siteDescription: `Agenzia digitale ed innovativa con esperienza nel design, nello sviluppo di siti internet, Worpress, SEO, SEM, branding e marketing.`,
     siteAuthor: `Mulphy`,
     baseUrl: `https://mulphy.com`,
     twitterAccount: `UpTheIrons1978`,
+    address: `Via Garibaldi n. 157`,
+    city: `Nepi (VT)`,
+    cap: `01036`,
+    vat: `01538850569`,
+    mobile: `+39 3892983674`,
+    mail: `hello@mulphy.com`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
