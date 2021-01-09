@@ -1,6 +1,13 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
+import {
+  ArchivePagination,
+  Card,
+  PageTitleSection,
+  Wrapper,
+} from "../styles/StyledPageElements";
+import Img from "gatsby-image";
 
 const BlogArchive = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges;
@@ -13,45 +20,65 @@ const BlogArchive = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      {posts.map(({ node }) => {
-        const title = node.frontmatter.title;
-        return (
-          <article key={node.frontmatter.slug}>
-            <header>
-              <h3>
-                <Link to={node.frontmatter.slug}> {title} </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-            </header>
-            <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
-            </section>
-          </article>
-        );
-      })}
-
-      {!isFirst && (
-        <Link to={prevPage} rel="prev">
-          ← Previous Page
-        </Link>
-      )}
-      {Array.from({ length: pages }, (_, i) => (
-        <Link
-          key={`pagination-number${i + 1}`}
-          to={`/blog/${i === 0 ? "" : i + 1}`}
-        >
-          {i + 1}
-        </Link>
-      ))}
-      {!isLast && (
-        <Link to={nextPage} rel="next">
-          Next Page →
-        </Link>
-      )}
+      <Wrapper>
+        <PageTitleSection>
+          <h1>Blog</h1>
+          <h3>Pensieri sparsi sul mondo del web</h3>
+        </PageTitleSection>
+        {posts.map(({ node }) => {
+          const {
+            title,
+            description,
+            date,
+            thumbnail,
+            category,
+            slug,
+          } = node.frontmatter;
+          return (
+            <Card key={node.id}>
+              <header>
+                {thumbnail && (
+                  <div className="post-thumbnail">
+                    <Img alt={title} fluid={thumbnail.childImageSharp.fluid} />
+                  </div>
+                )}
+                <small>{date}</small>
+                <p>
+                  {category.map((item, i) => (
+                    <span key={`${item}__${i}`}>{item}</span>
+                  ))}
+                </p>
+              </header>
+              <section>
+                <Link to={`/blog/${slug}`}>
+                  <h2>{title}</h2>
+                </Link>
+                <p>
+                  {`${description.slice(0, 220)} ...`}
+                  {` `}
+                  <span>
+                    <Link className="readmore" to={`/blog/${slug}`}>
+                      leggi tutto
+                    </Link>
+                  </span>
+                </p>
+              </section>
+            </Card>
+          );
+        })}
+        <ArchivePagination>
+          {!isFirst && (
+            <Link to={prevPage} rel="prev">
+              ← Pagina Precedente
+            </Link>
+          )}
+          {!isLast && (
+            <Link to={nextPage} rel="next">
+              Pagina Successiva →
+            </Link>
+          )}
+        </ArchivePagination>
+      </Wrapper>
     </Layout>
   );
 };
@@ -69,11 +96,21 @@ export const pageQuery = graphql`
       totalCount
       edges {
         node {
+          id
           frontmatter {
-            slug
-            date
             title
             description
+            slug
+            date(formatString: "DD MMMM YYYY", locale: "it")
+            metadate
+            category
+            thumbnail {
+              childImageSharp {
+                fluid(maxWidth: 600) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
           html
         }

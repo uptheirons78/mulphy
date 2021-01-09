@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
+import { ArchivePagination } from "../styles/StyledPageElements";
 
 const ProjectsArchive = ({ data, pageContext }) => {
   const projects = data.allMarkdownRemark.edges;
@@ -33,24 +34,18 @@ const ProjectsArchive = ({ data, pageContext }) => {
           </article>
         );
       })}
-      {!isFirst && (
-        <Link to={prevPage} rel="prev">
-          ← Previous Page
-        </Link>
-      )}
-      {Array.from({ length: pages }, (_, i) => (
-        <Link
-          key={`pagination-number${i + 1}`}
-          to={`/projects/${i === 0 ? "" : i + 1}`}
-        >
-          {i + 1}
-        </Link>
-      ))}
-      {!isLast && (
-        <Link to={nextPage} rel="next">
-          Next Page →
-        </Link>
-      )}
+      <ArchivePagination>
+        {!isFirst && (
+          <Link to={prevPage} rel="prev">
+            ← Previous Page
+          </Link>
+        )}
+        {!isLast && (
+          <Link to={nextPage} rel="next">
+            Next Page →
+          </Link>
+        )}
+      </ArchivePagination>
     </Layout>
   );
 };
