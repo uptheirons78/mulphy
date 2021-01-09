@@ -8,6 +8,7 @@ import {
   Wrapper,
 } from "../styles/StyledPageElements";
 import Img from "gatsby-image";
+import { PageMetaTags } from "../components/MetaTags";
 
 const BlogArchive = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges;
@@ -17,9 +18,15 @@ const BlogArchive = ({ data, pageContext }) => {
   const prevPage =
     currentPage - 1 === 1 ? "/blog/" : (currentPage - 1).toString();
   const nextPage = (currentPage + 1).toString();
+  const { baseUrl } = data.site.siteMetadata;
 
   return (
     <Layout>
+      <PageMetaTags
+        title="Blog"
+        description="Collezione di articoli e pensieri legati al mondo del web redatta dalla Mulphy agenzia digitale ed innovativa"
+        canonical={`${baseUrl}/blog`}
+      />
       <Wrapper>
         <PageTitleSection>
           <h1>Blog</h1>
@@ -87,6 +94,12 @@ export default BlogArchive;
 
 export const pageQuery = graphql`
   query Posts($skip: Int! = 0, $limit: Int!) {
+    site {
+      siteMetadata {
+        baseUrl
+        twitterAccount
+      }
+    }
     allMarkdownRemark(
       filter: { fields: { collection: { eq: "posts" } } }
       sort: { fields: [frontmatter___date], order: DESC }
