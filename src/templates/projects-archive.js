@@ -1,7 +1,14 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
-import { ArchivePagination } from "../styles/StyledPageElements";
+import Img from "gatsby-image";
+import {
+  ArchivePagination,
+  PageTitleSection,
+  Wrapper,
+  Card,
+} from "../styles/StyledPageElements";
+import { PageMetaTags } from "../components/MetaTags";
 
 const ProjectsArchive = ({ data, pageContext }) => {
   const projects = data.allMarkdownRemark.edges;
@@ -11,27 +18,63 @@ const ProjectsArchive = ({ data, pageContext }) => {
   const prevPage =
     currentPage - 1 === 1 ? "/projects/" : (currentPage - 1).toString();
   const nextPage = (currentPage + 1).toString();
+  const { baseUrl } = data.site.siteMetadata;
 
   return (
     <Layout>
+      <PageMetaTags
+        title="Portfolio"
+        description="Collezione di lavori recenti progettati, disegnati e sviluppati da Mulphy. Agenzia digitale e creativa"
+        canonical={`${baseUrl}/projects`}
+      />
+      <Wrapper>
+        <PageTitleSection>
+          <h1>Portfolio</h1>
+          <h3>Alcuni dei nostri lavori recenti</h3>
+        </PageTitleSection>
+      </Wrapper>
       {projects.map(({ node }) => {
-        const title = node.frontmatter.title;
+        const {
+          title,
+          description,
+          slug,
+          projectDate,
+          projectCategory,
+          projectThumbnail,
+        } = node.frontmatter;
         return (
-          <article key={node.frontmatter.slug}>
+          <Card key={node.id}>
             <header>
-              <h3>
-                <Link to={node.frontmatter.slug}> {title} </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
+              {projectThumbnail && (
+                <div className="post-thumbnail">
+                  <Img
+                    alt={title}
+                    fluid={projectThumbnail.childImageSharp.fluid}
+                  />
+                </div>
+              )}
+              <small>{projectDate}</small>
+              <p>
+                {projectCategory.map((item, i) => (
+                  <span key={`${item}__${i}`}>{item}</span>
+                ))}
+              </p>
             </header>
             <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
+              <Link to={`/projects/${slug}`}>
+                <h2>{title}</h2>
+              </Link>
+              <p>
+                {`${description.slice(0, 220)} ...`}
+                {` `}
+                <span>
+                  <Link className="readmore" to={`/projects/${slug}`}>
+                    leggi tutto
+                  </Link>
+                </span>
+              </p>
             </section>
-          </article>
+          </Card>
         );
       })}
       <ArchivePagination>
@@ -54,6 +97,11 @@ export default ProjectsArchive;
 
 export const pageQuery = graphql`
   query Projects($skip: Int! = 0, $limit: Int!) {
+    site {
+      siteMetadata {
+        baseUrl
+      }
+    }
     allMarkdownRemark(
       filter: { fields: { collection: { eq: "projects" } } }
       sort: { fields: [frontmatter___date], order: DESC }
@@ -63,11 +111,22 @@ export const pageQuery = graphql`
       totalCount
       edges {
         node {
+          id
           frontmatter {
-            slug
-            date
             title
+            subTitle
+            date
             description
+            slug
+            projectDate
+            projectCategory
+            projectThumbnail {
+              childImageSharp {
+                fluid(maxWidth: 1200) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
           html
         }

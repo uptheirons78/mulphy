@@ -97,7 +97,6 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         baseUrl
-        twitterAccount
       }
     }
     allMarkdownRemark(

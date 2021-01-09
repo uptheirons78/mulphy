@@ -9,7 +9,7 @@ projectUrl: "https://www.vesperhomes.co.uk/"
 projectClient: "Museo Civico di Nepi"
 projectDate: "Maggio 2017"
 projectCategory: ["Museo", "Wordpress"]
-projectThumbnail: "../assets/vesper-homes-thumbnail.jpg"
+projectThumbnail: "../assets/vesper-homes.jpg"
 projectImage: "../assets/vesper-homes.jpg"
 ---
 ### THE CLIENT
@@ -19,3 +19,5 @@ Vesper Homes is a London based estate agency, with a core focus on property mana
 ### THE BRIEF
 
 Vesper initially approached us to help them re-brand. The last piece of the puzzle was to transform their digital presence. The key was to build a dynamic space that was interactive and engaging, without compromising on building an environment that clearly and concisely showcased their business offering.
+
+![Image of Yaktocat](../assets/vesper-homes.jpg)

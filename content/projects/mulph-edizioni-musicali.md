@@ -7,9 +7,9 @@ description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusanda
 slug: mulph-edizioni-musicali
 projectUrl: "https://www.vesperhomes.co.uk/"
 projectClient: "Mulph Edizioni Musicali"
-projectDate: "Dicembra 2020"
+projectDate: "Dicembre 2020"
 projectCategory: ["Ecommerce", "Wordpress"]
-projectThumbnail: "../assets/vesper-homes-thumbnail.jpg"
+projectThumbnail: '../assets/insta-shopify.jpg'
 projectImage: "../assets/vesper-homes.jpg"
 ---
 ### THE CLIENT
