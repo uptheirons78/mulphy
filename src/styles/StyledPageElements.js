@@ -116,3 +116,17 @@ export const ArchivePagination = styled.div`
     }
   }
 `;
+
+export const SectionName = styled.h2`
+  color: var(--clr-primary);
+  font-family: var(--font-primary);
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+`;
+export const SectionSummary = styled.h3`
+  color: var(--clr-gray-700);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  padding: var(--sp-3) 0;
+`;
