@@ -125,7 +125,7 @@ export const SectionName = styled.h2`
   text-transform: uppercase;
 `;
 export const SectionSummary = styled.h3`
-  color: var(--clr-gray-700);
+  color: var(--clr-gray-800);
   font-size: 1.8rem;
   text-transform: uppercase;
   padding: var(--sp-3) 0;

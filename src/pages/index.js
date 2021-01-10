@@ -8,11 +8,15 @@ import { PageMetaTags } from "../components/MetaTags";
 
 const IndexPage = ({ data }) => {
   const faq = data.allMarkdownRemark.edges[0].node.frontmatter.faq;
+  const {
+    servicesTitle,
+    servicesDescription,
+  } = data.allMarkdownRemark.edges[0].node.frontmatter;
   return (
     <Layout>
       <PageMetaTags title="Home" />
       <HomeSectionOne />
-      <HomeSectionTwo />
+      <HomeSectionTwo title={servicesTitle} description={servicesDescription} />
       <AccordionSection faq={faq} />
     </Layout>
   );
@@ -29,6 +33,10 @@ export const pageQuery = graphql`
       edges {
         node {
           frontmatter {
+            servicesTitle
+            servicesDescription
+            faqTitle
+            faqDescription
             faq {
               answer
               faqId

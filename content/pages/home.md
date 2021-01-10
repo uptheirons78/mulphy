@@ -1,5 +1,11 @@
 ---
 templateKey: homepage
+servicesTitle: 'I Nostri Servizi'
+servicesDescription: 'Attraverso lo studio delle necessità dei nostri clienti, ci occupiamo di ogni aspetto dello sviluppo web'
+worksTitle: 'My Works'
+worksDescription: 'A collection of some recently completed projects, covering a wide range of design disciplines'
+faqTitle: 'F.A.Q.'
+faqDescription: 'Alcune risposte alle domande più frequenti che ci vengono poste'
 faq:
   - question: 'What does diffusion digital do ?'
     answer: '<p>Diffusion Digital is an expert e-Commerce, Digital Marketing & Content agency based in London that speciliases in creating bespoke, fully responsive websites with purposeful content tailored to your users.</p>'
