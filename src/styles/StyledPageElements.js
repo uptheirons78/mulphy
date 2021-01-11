@@ -123,10 +123,18 @@ export const SectionName = styled.h2`
   font-size: 1.4rem;
   font-weight: 600;
   text-transform: uppercase;
+
+  @media screen and (max-width: 500px) {
+    font-size: 1.2rem;
+  }
 `;
 export const SectionSummary = styled.h3`
   color: var(--clr-gray-800);
   font-size: 1.8rem;
   text-transform: uppercase;
   padding: var(--sp-3) 0;
+
+  @media screen and (max-width: 500px) {
+    font-size: 1.4rem;
+  }
 `;

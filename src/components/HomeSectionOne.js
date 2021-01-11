@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import Img from "gatsby-image";
+import { Wrapper } from "../styles/StyledPageElements";
 
 const HomeSectionOne = () => {
   const data = useStaticQuery(graphql`
@@ -15,8 +16,8 @@ const HomeSectionOne = () => {
       }
       museo: file(relativePath: { eq: "mulphy-museociviconepi.png" }) {
         childImageSharp {
-          fixed(width: 220, quality: 90) {
-            ...GatsbyImageSharpFixed
+          fluid(maxWidth: 220) {
+            ...GatsbyImageSharpFluid
           }
         }
       }
@@ -29,7 +30,7 @@ const HomeSectionOne = () => {
         backgroundImage: `url(${data.background.childImageSharp.resize.src})`,
       }}
     >
-      <div className="wrapper">
+      <Wrapper className="main-wrapper">
         <div className="left-container">
           <h1>
             Immaginiamo il
@@ -44,17 +45,26 @@ const HomeSectionOne = () => {
             dei suoi clienti.
           </p>
           <Link className="home-cta" to="/contatti">
-            Chiedi un preventivo →
+            Chiedi un preventivo ›
           </Link>
         </div>
         <div className="right-container">
-          <Img
-            fixed={data.museo.childImageSharp.fixed}
-            alt="Museo Civico Nepi"
-            className="mockup"
-          />
+          <div className="img-container">
+            <div className="img-frame img-frame-left">
+              <Img
+                alt="Mulphy: agenzia creativa e digitale"
+                fluid={data.museo.childImageSharp.fluid}
+              />
+            </div>
+            <div className="img-frame img-frame-right">
+              <Img
+                alt="Mulphy: agenzia creativa e digitale"
+                fluid={data.museo.childImageSharp.fluid}
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      </Wrapper>
     </StyledSectionOne>
   );
 };
@@ -62,38 +72,42 @@ const HomeSectionOne = () => {
 export default HomeSectionOne;
 
 const StyledSectionOne = styled.section`
-  height: calc(100vh - 90px);
   background-color: var(--clr-secondary);
   background-size: cover;
   background-repeat: no-repeat;
   padding-top: 50px;
-  padding-left: var(--sp-4);
-  padding-right: var(--sp-4);
+  padding-bottom: 50px;
 
-  .wrapper {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    color: var(--clr-gray-50);
+  @media screen and (max-width: 671px) {
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+
+  .main-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: var(--sp-4);
 
-    .left-container {
-      grid-column: span 1;
+    @media screen and (max-width: 481px) {
+      grid-template-columns: repeat(4, 1fr);
     }
+  }
 
-    .right-container {
-      grid-column: span 1;
-      position: relative;
+  .left-container {
+    grid-column: span 2;
 
-      .mockup {
-        margin-left: 6rem;
-        margin-top: 3rem;
-      }
+    @media screen and (max-width: 481px) {
+      grid-column: span 4;
     }
 
     h1 {
-      font-size: 3.5rem;
-      font-weight: 900;
+      color: var(--clr-gray-50);
+      font-size: 3rem;
+      padding: var(--sp-4) 0;
+
+      @media screen and (max-width: 671px) {
+        font-size: 2.4rem;
+      }
 
       .accent-word {
         color: var(--clr-primary);
@@ -101,21 +115,71 @@ const StyledSectionOne = styled.section`
     }
 
     p {
-      font-size: 1.4rem;
-      line-height: 2rem;
-      margin-top: var(--sp-4);
+      color: var(--clr-gray-50);
+      font-size: 1.2rem;
+      padding: var(--sp-2) 0;
+
+      @media screen and (max-width: 671px) {
+        font-size: 1rem;
+      }
     }
 
-    .home-cta {
+    a {
       display: inline-block;
-      margin-top: var(--sp-6);
-      background-color: var(--clr-primary);
       color: var(--clr-gray-50);
-      padding: var(--sp-1) var(--sp-4);
-      transition: all 450ms;
+      margin-top: 1rem;
+      padding: var(--sp-2) var(--sp-4);
+      background-color: var(--clr-primary);
+      transition: all 450ms ease-in;
 
       &:hover {
-        letter-spacing: 1px;
+        color: var(--clr-primary);
+        background-color: var(--clr-gray-50);
+      }
+    }
+  }
+
+  .right-container {
+    grid-column: span 1;
+    @media screen and (max-width: 481px) {
+      display: none;
+    }
+
+    .img-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      .img-frame {
+        max-width: 140px;
+        width: 100%;
+
+        @media screen and (max-width: 671px) {
+          max-width: 120px;
+        }
+
+        @media screen and (max-width: 481px) {
+          max-width: 100px;
+        }
+      }
+      .img-frame-left {
+        position: absolute;
+        top: 5%;
+        left: 15%;
+        z-index: 4;
+
+        @media screen and (max-width: 600px) {
+          left: 0;
+        }
+      }
+      .img-frame-right {
+        position: absolute;
+        top: 20%;
+        left: 34%;
+        z-index: 2;
+        @media screen and (max-width: 600px) {
+          left: 20%;
+        }
       }
     }
   }
