@@ -10,7 +10,7 @@ projectClient: "Vesper Homes"
 projectDate: "Maggio 2018"
 projectCategory: ["Property", "Wordpress"]
 projectThumbnail: "../assets/vesper-homes-thumbnail.jpg"
-projectImage: "../assets/vesper-homes.jpg"
+projectImage: "../assets/placeholder.png"
 ---
 ### THE CLIENT
 

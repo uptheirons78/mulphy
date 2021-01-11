@@ -10,7 +10,7 @@ projectClient: "Another Project"
 projectDate: "Maggio 2015"
 projectCategory: ["Studio Professionale", "Headless CMS"]
 projectThumbnail: "../assets/vesper-homes-thumbnail.jpg"
-projectImage: "../assets/vesper-homes.jpg"
+projectImage: "../assets/placeholder.png"
 ---
 ### THE CLIENT
 

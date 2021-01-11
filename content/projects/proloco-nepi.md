@@ -10,7 +10,7 @@ projectClient: "Pro Loco di Nepi"
 projectDate: "Maggio 2016"
 projectCategory: ["Ente", "Headless CMS"]
 projectThumbnail: "../assets/vesper-homes-thumbnail.jpg"
-projectImage: "../assets/vesper-homes.jpg"
+projectImage: "../assets/placeholder.png"
 ---
 ### THE CLIENT
 

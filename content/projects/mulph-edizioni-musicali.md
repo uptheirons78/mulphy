@@ -10,7 +10,7 @@ projectClient: "Mulph Edizioni Musicali"
 projectDate: "Dicembre 2020"
 projectCategory: ["Ecommerce", "Wordpress"]
 projectThumbnail: '../assets/insta-shopify.jpg'
-projectImage: "../assets/vesper-homes.jpg"
+projectImage: "../assets/placeholder.png"
 ---
 ### THE CLIENT
 

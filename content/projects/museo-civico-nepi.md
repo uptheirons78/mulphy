@@ -10,7 +10,7 @@ projectClient: "Museo Civico di Nepi"
 projectDate: "Maggio 2017"
 projectCategory: ["Museo", "Wordpress"]
 projectThumbnail: "../assets/vesper-homes.jpg"
-projectImage: "../assets/vesper-homes.jpg"
+projectImage: "../assets/placeholder.png"
 ---
 ### THE CLIENT
 
