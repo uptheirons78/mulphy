@@ -6,6 +6,7 @@ import HomeSectionTwo from "../components/HomeSectionTwo";
 import Layout from "../components/Layout";
 import { PageMetaTags } from "../components/MetaTags";
 import HomePortfolioSection from "../components/HomePortfolioSection";
+import HomeBlogSection from "../components/HomeBlogSection";
 
 const IndexPage = ({ data }) => {
   const faq = data.allMarkdownRemark.edges[0].node.frontmatter.faq;
@@ -19,6 +20,7 @@ const IndexPage = ({ data }) => {
       <HomeSectionOne />
       <HomeSectionTwo title={servicesTitle} description={servicesDescription} />
       <HomePortfolioSection />
+      <HomeBlogSection />
       <AccordionSection faq={faq} />
     </Layout>
   );
