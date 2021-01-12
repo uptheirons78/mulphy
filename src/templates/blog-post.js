@@ -126,15 +126,28 @@ const MarkdownContent = styled.article`
     strong,
     em {
       color: var(--clr-primary);
+      font-weight: bold;
       transition: all 350ms;
+    }
+
+    a {
+      border-bottom: 2px solid var(--clr-primary);
     }
 
     a:hover {
       color: var(--clr-secondary);
-      font-weight: bold;
+      border-bottom: 2px solid var(--clr-secondary);
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      li {
+        color: var(--clr-gray-700);
+      }
     }
 
     p {
+      color: var(--clr-gray-700);
       @media screen and (max-width: 550px) {
         font-size: 1.1rem;
       }

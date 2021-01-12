@@ -72,7 +72,7 @@ const HomeBlogSection = () => {
                       />
                     </Link>
                   </div>
-                  <div className="card-label">{category[1]}</div>
+                  <div className="card-label">{category[0]}</div>
                   <div className="card-title">{title}</div>
                 </div>
               </article>
