@@ -120,6 +120,7 @@ const MarkdownContent = styled.article`
       color: var(--clr-primary);
       margin-top: var(--sp-6);
       margin-bottom: var(--sp-2);
+      text-transform: uppercase;
     }
 
     a,
@@ -148,6 +149,9 @@ const MarkdownContent = styled.article`
 
     p {
       color: var(--clr-gray-700);
+      padding-top: var(--sp-2);
+      padding-bottom: var(--sp-2);
+
       @media screen and (max-width: 550px) {
         font-size: 1.1rem;
       }
@@ -210,7 +214,7 @@ export const pageQuery = graphql`
         thumbnail {
           childImageSharp {
             fluid(maxWidth: 600) {
-              ...GatsbyImageSharpFluid
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }

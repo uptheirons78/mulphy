@@ -184,12 +184,20 @@ const ProjectContent = styled.article`
       transition: all 350ms;
     }
 
+    a {
+      border-bottom: 2px solid var(--clr-primary);
+    }
+
     a:hover {
       color: var(--clr-secondary);
-      font-weight: bold;
+      border-bottom: 2px solid var(--clr-secondary);
     }
 
     p {
+      color: var(--clr-gray-700);
+      padding-top: var(--sp-2);
+      padding-bottom: var(--sp-2);
+
       @media screen and (max-width: 550px) {
         font-size: 1.1rem;
       }
@@ -257,7 +265,7 @@ export const pageQuery = graphql`
         projectThumbnail {
           childImageSharp {
             fluid(maxWidth: 600) {
-              ...GatsbyImageSharpFluid
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }
