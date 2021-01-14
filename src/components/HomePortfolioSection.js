@@ -24,7 +24,7 @@ const HomePortfolioSection = () => {
               projectImage {
                 childImageSharp {
                   fluid(maxWidth: 800) {
-                    ...GatsbyImageSharpFluid
+                    ...GatsbyImageSharpFluid_withWebp
                   }
                 }
               }
@@ -112,7 +112,7 @@ const StyledPortfolioSection = styled.section`
           bottom: 5px;
           left: 5px;
           padding: var(--sp-2) var(--sp-4);
-          background-color: rgba(255, 255, 255, 0.8);
+          background-color: var(--clr-gray-900);
 
           a {
             color: currentColor;
@@ -120,12 +120,12 @@ const StyledPortfolioSection = styled.section`
 
           h3 {
             font-size: 1rem;
-            color: var(--clr-primary);
+            color: var(--clr-gray-100);
           }
 
           p {
             font-size: 0.8rem;
-            color: var(--clr-gray-600);
+            color: var(--clr-gray-300);
 
             span:not(:last-child):after {
               content: " - ";

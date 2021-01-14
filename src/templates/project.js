@@ -132,7 +132,7 @@ const ProjectContent = styled.article`
   }
 
   .project-thumbnail {
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
@@ -191,6 +191,13 @@ const ProjectContent = styled.article`
     a:hover {
       color: var(--clr-secondary);
       border-bottom: 2px solid var(--clr-secondary);
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      li {
+        color: var(--clr-gray-700);
+      }
     }
 
     p {
@@ -264,8 +271,8 @@ export const pageQuery = graphql`
         projectCategory
         projectThumbnail {
           childImageSharp {
-            fluid(maxWidth: 600) {
-              ...GatsbyImageSharpFluid_withWebp
+            fluid(maxWidth: 600, quality: 100) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
